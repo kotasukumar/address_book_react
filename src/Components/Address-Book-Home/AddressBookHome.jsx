@@ -40,12 +40,12 @@ class Home extends Component {
 
     sortByCity() {
         BookServices.sortByCity().then((response) => {
-            this.setState({ addressbook: response.data.data });
+            this.setState({ addressbook: response.data.contactData });
         });
     }
     sortByState() {
         BookServices.sortByState().then((response) => {
-            this.setState({ addressbook: response.data.data });
+            this.setState({ addressbook: response.data.contactData });
         });
     }
     

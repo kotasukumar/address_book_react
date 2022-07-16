@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import '../Login/login.css';
+import '../Registration/Registration.css';
 import RegistrationService from '../../Service/RegistrationService';
 
 const Registration = (props) => {
@@ -21,25 +21,25 @@ const Registration = (props) => {
     return(
         <div className="loginPage">
             <div className="login_text">
-                LOGIN PAGE
+                REGISTRATION PAGE
             </div>
             <div className="body">
                 <form onSubmit={save}>
-                    <div className="login_label">
+                    <div className="label">
                         <label>User Name</label>
-                        <input id='userName' name="userName" type='text'></input>
-                    </div>
-                    <div className="email_label">
+                        </div>
+                        <input id='userName' name="userName" type='text' className='input'></input>                   
+                    <div className="label">
                         <label>Email</label>
-                        <input id='emailID' name="emailID" type='text'></input>
-                    </div>
-                    <div className="password_label">
-                        <label>Password</label>
-                        <input id='password' name="password" type='text'></input>
-                    </div>
-                    <button className='signup_button'>SignUp</button>
+                        </div>
+                        <input id='emailID' name="emailID" type='text' className='input'></input>                   
+                    <div className="label">
+                        <label>Password</label></div>
+                        <input id='password' name="password" type='text' className='input'></input> 
+                        <br/>                  
+                    <button className='button'>SignUp</button>
                     <Link to='/login'>
-                        <button>Back to home</button>
+                        <button className='button'>Login</button>
                     </Link>
                 </form>
             </div>

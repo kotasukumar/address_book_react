@@ -23,10 +23,10 @@ class BookService{
         return axios.delete(`${this.baseUrl}/delete/${personId}`);
       }
     sortByCity() {
-        return axios.get(`${this.baseUrl}/sortcity`);
+        return axios.get(`${this.baseUrl}/shortby/city`);
       }
     sortByState() {
-        return axios.get(`${this.baseUrl}/sortstate`);
+        return axios.get(`${this.baseUrl}/shortby/state`);
       }
 }
 

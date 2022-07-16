@@ -30,19 +30,19 @@ function Login(){
             </div>
             <div className="body">
                 <form onSubmit={check}>
-                    <div className="login_label">
-                        <label>User Name</label>
-                        <input type='text' id='userName' name="userName"/>
+                    <div className="label">
+                        <label>User Name</label>                        
+                        <input type='text' id='userName' name="userName" className='input'/>
                     </div>
-                    <div className="password_label">
+                    <div className="label">
                         <label>Password</label>
-                        <input type='text' id='password' name="password"/>
+                        <input type='text' id='password' name="password" className='input'/>
                     </div>
                     <div>
-                    <button className='login_button'>Login</button></div>
+                    <button className='button'>Login</button></div>
                     <div>or</div>
                     <Link to='/register'>
-                    <button className='signup_button'>SignUp</button></Link>
+                    <button className='button'>SignUp</button></Link>
                 </form>
             </div>
         </div>
