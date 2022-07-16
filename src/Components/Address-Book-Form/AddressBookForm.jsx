@@ -39,7 +39,7 @@ const onNameChange = async (event) => {
 }
 
     useEffect (() => {
-        //console.log(params.id)
+        console.log(params.id)
         if (params.id){
             getPersonId(params.id);
             console.log(params.id);
@@ -62,11 +62,11 @@ const setData = (obj) => {
                ...obj,
                id: obj.id,
                name:obj.name,
-               contact: obj.contact,
+               contact: obj.mobileNumber,
                address: obj.address,
                city: obj.city,
                state: obj.state,
-               zip: obj.zip,
+               zip: obj.pinCode,
                isUpdate :true,
              });
            };

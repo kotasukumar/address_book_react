@@ -1,14 +1,15 @@
-import React, { Component} from 'react'
-import './Home.css'
-import {Link} from 'react-router-dom'
+import React, { Component} from 'react';
+import './Home.css';
+import {Link} from 'react-router-dom';
 import add from '../../Assests/add_person.png';
 import BookServices from '../../Service/BookService';
 import { toast } from 'react-toastify';
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import logout from '../../Assests/logout.webp';
 
 class Home extends Component {
     /*============================================================================================ */
-    // navigate = useNavigate();
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -67,11 +68,6 @@ class Home extends Component {
         }
   };
 
-    update = (id) => {       
-        let navigate = useNavigate();
-        navigate(`/AddressBookForm/${id}`);
-        console.log(id);
-     };
     /*============================================================================================ */
     render() {
   return (
@@ -81,6 +77,8 @@ class Home extends Component {
             <div className="person-detail-text">
                 Person Details
             </div>
+            <Link to="/login">
+                <img width='30' height='30' src={logout} alt='/'/></Link>
             <Link to="/form">
                 <img width='30' height='30' src={add} alt='/'/></Link>
         </div>
@@ -104,7 +102,7 @@ class Home extends Component {
 							<td>{book.city}</td>
                             <td>{book.state}</td>
                             <td>{book.pinCode}</td>
-                            <td><button onClick={() => this.update(book.id)} >Edit</button>
+                            <td><NavLink to={`/AddressBookForm/${book.id}`}><button>Edit</button></NavLink>
                             <button onClick={() => this.delete(book.id)} >Delete</button></td>
                         </tr>
     ))}
