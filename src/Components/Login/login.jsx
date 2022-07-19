@@ -14,7 +14,7 @@ function Login(){
         console.log(object);
             LoginService.checkLogin(object).then((reasponse) =>{
                 if(reasponse.data.contactData === true){
-                    alert("User found, and login successfull");
+                    alert("Welcome " + object.userName + " click ok to see saved contact details");
                     navigate(`/home`)
                 } else{
                     alert("Login Unsuccessfull");

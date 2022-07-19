@@ -86,8 +86,6 @@ body {
     text-align: left;
 }
 
-
-
 .row-content {
     display: flex;
     flex-direction: row;
@@ -107,11 +105,11 @@ label {
     display: inline-block;
 }
 
-.text {
+.label_text {
     text-align: left;
     font: normal normal normal 18px/24px Arial;
     letter-spacing: 0px;
-    color: #42515F;
+    color: black;
     opacity: 1;
 }
 
@@ -191,7 +189,18 @@ label {
     font-size: larger;
 }
 
-.add-reset{
-    font-size: x-large;
+.button {
+    font-size: 20px;
+    font-family: Roboto;
+    letter-spacing: 0px;
     color: #008CFF;
+    opacity: 1;
+    background:brown;
+    border: none;
+    font-weight: 400;
+    min-width: 140px;
+    padding: 7px 7px;
+    margin: 10px 12px;
+    border: 1px solid #707070;
+    cursor: pointer;
 }

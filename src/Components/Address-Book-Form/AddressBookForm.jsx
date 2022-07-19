@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import './Form.css'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import BookServices from '../../Service/BookService';
-import logo from '../../Assests/address-book-icon.png' 
+import logo from '../../Assests/address-book-icon.png' ;
+import logout from '../../Assests/logout.webp';
 
 
 const Form = (props) =>{
 
 /*=================================================================================================== */
+
     let startValue = {
     name: "",
     contact: "",
@@ -23,9 +25,55 @@ const Form = (props) =>{
     contact: '',
     zip: '',
     }
+    let states = [
+        {id:"Andhra Pradesh",name:"Andhra Pradesh"},
+        {id:"Tamil Nadu",name:"Tamil Nadu"},
+        {id:"Kerala",name:"Kerala"},
+        {id:"Karnataka",name:"Karnataka"},
+        {id:"Maharastra",name:"Maharastra"},
+        {id:"West Bengal",name:"West Bengal"},
+        {id:"Rajeshthan",name:"Rajeshthan"},
+        {id:"Bihar",name:"Bihar"}
+    ]
+    
+    let cities = [
+        {id:"1",stateId:"Andhra Pradesh",name:["Amaravathi", "Chittoor"]},
+      /*   {id:"2",stateId:"Andhra Pradesh",name:"Chittoor"}, */
+        {id:"3",stateId:"Tamil Nadu",name:"Chennai"},
+        {id:"4",stateId:"Tamil Nadu",name:"Maduri"},
+        {id:"5",stateId:"Kerala",name:"Munnar"},
+        {id:"6",stateId:"Kerala",name:"Kochi"},
+        {id:"7",stateId:"Karnataka",name:"Banglore"},
+        {id:"8",stateId:"Karnataka",name:"Mysore"},
+        {id:"9",stateId:"Maharastra",name:"Mumbai"},
+        {id:"10",stateId:"Maharastra",name:"Pune"},
+        {id:"11",stateId:"West Bengal",name:"Kolkata"},
+        {id:"12",stateId:"West Bengal",name:"Dum Dum"},
+        {id:"13",stateId:"Rajeshthan",name:"Jaipur"},
+        {id:"14",stateId:"Rajeshthan",name:"Kota"},
+        {id:"15",stateId:"Bihar",name:"Patna"},
+        {id:"16",stateId:"Bihar",name:"Gaya"},
+    ]
+    
     const [formValue, setForm] = useState(startValue);
     const [formError, setFormError] = useState(initialError);
     const params = useParams();
+    const [ state, setState] = useState([]);
+    const [ city, setCity] = useState([]);
+
+useEffect(()=>{
+    setState(states);
+    
+    
+},[])
+    
+const handleCity = (event) => {
+    const dt = cities.filter(x => x.stateId === event.target.value);
+    setCity(dt);
+    console.log(dt);
+    onNameChange(event);
+    
+}
 
 const onReset = () => {
     setForm({
@@ -37,6 +85,7 @@ const onNameChange = async (event) => {
     setForm({ ...formValue, [event.target.name]: event.target.value });
     console.log('value for', event.target.name, event.target.value);
 }
+
 
     useEffect (() => {
         console.log(params.id)
@@ -90,7 +139,6 @@ const save = async (event) => {
             var value = window.confirm(data);
             if(value === true){
                 alert("update successfull!");
-                this.props.history.push("");
               }else{
                   window.location.reload();
               }
@@ -103,6 +151,10 @@ const save = async (event) => {
     }    
     // window.location.reload(); 
 }
+
+/* useEffect(() => {
+    validateData();
+});  */
 
 const validateData = () => {
     let error = formError;
@@ -120,40 +172,53 @@ const validateData = () => {
         error.address = "";
     }
 
+    if (!formValue.contact.match('^[0-9]{10}$')) {
+        error.contact = "Invalid PHONE NUMBER"
+    }
+    else {
+        error.contact = "";
+    }
+
+    if (!formValue.zip.match('^[0-9]{5}$')) {
+        error.zip = "Invalid ZIP CODE";
+    }
+    else {
+        error.zip = "";
+    }
+
 
     setFormError(error);
+    
 }
-
-useEffect(() => {
-    validateData();
-});
 /*=================================================================================================== */
 
   return (
     <div>       
   <div className="form-content">
       <div className="form-head">
-          <span> PERSON ADDRESS FORM </span>          
+          <span> PERSON ADDRESS FORM......</span>          
         <span id='img'>
             <Link to="/home">
-            <img width = "30" height = "30" src={logo} alt="logo"/></Link></span>
+            <img className='image' width = "40" height = "40" src={logo} alt="logo"/></Link>
+            <Link to="/login">
+                <img width='60' height='60' src={logout} alt='/'/></Link></span>
         </div>    
       <form className="form" action="#" onSubmit={save}>
-          <label className="label text" htmlFor="name">Full Name</label>
+          <label className="label_text" htmlFor="name">Full Name</label>
           <div className="row-content">
               <input className="input" type="text" id="name" name="name" placeholder="Enter Name" 
               onChange={onNameChange} value={formValue.name} required/>
                <div className="error">{formError.name}</div>
           </div>
 
-          <label className="label text" htmlFor="phone">Phone Number</label>
+          <label className="label_text" htmlFor="phone">Phone Number</label>
           <div className="row-content">
               <input className="input" type="text" id="contact" name="contact" placeholder="Enter Phone Number" 
               onChange={onNameChange} value={formValue.contact} required/>
               <div className="error">{formError.contact}</div>
           </div>
 
-          <label className="label text" htmlFor="address">Address</label>
+          <label className="label_text" htmlFor="address">Address</label>
           <div className="row-content">
               <textarea className="input" name="address" id="address" rows="4" placeholder="Enter Address" 
               onChange={onNameChange} value={formValue.address} ></textarea>
@@ -162,34 +227,48 @@ useEffect(() => {
 
           <div className="row">
               <div className="input-content">
-                  <label className="label text" htmlFor="city">City</label>
+                  <label className="label_text" htmlFor="state">State</label>
                   <div className="row-content">
-                      <select className="input" name="city" id="city" value={formValue.city} onChange={onNameChange} >
-                          <option value="">City</option>
-                          <option value="Mumbai">Mumbai</option>
-                                    <option value="Solapur">Solapur</option>
-                                    <option value="Pune">Pune</option>
-                                    <option value="Chennai">Chennai</option>
-                                    <option value="Kolkata">Kolkata</option>
-                                    <option value="Jaipur">Jaipur</option>
-                      </select>
+                    <select id="state" className='input' name="state" onChange={(e) => handleCity(e)} value={formValue.state}>
+                        <option value="" >Select State</option>
+                        {
+                            state && 
+                            state !== undefined ?
+                            state.map((ctr,index) => {
+                            return(
+                                <option key={index} value={ctr.name}>{ctr.name}</option>
+                                
+                            )
+                        })
+                        :"No State"
+
+                    }
+                    </select>
+
                   </div>
               </div>
               <div className="input-content">
-                  <label className="label text" htmlFor="state">State</label>
+                  <label className="label_text" htmlFor="city">City</label>
                   <div className="row-content">
-                      <select className="input" name="state" id="state" onChange={onNameChange} value={formValue.state}>
-                          <option value="">State</option>
-                          <option value="Rajasthan">Rajasthan</option>
-                          <option value="Maharashtra">Maharashtra</option>
-                          <option value="West Bengal">West Bengal</option>
-                          <option value="Bihar">Bihar</option>
-                          <option value="Tamil Nadu">Tamil Nadu</option>
-                      </select>
+                      <select id="city" className='input' name="city" onChange={onNameChange} value={formValue.city}>
+                        <option value="">Select City</option>handleCity();
+                        {
+                            
+                            city && 
+                            city !== undefined ?
+                            city.map((ctr,index) => {
+                                return(
+                                    <option key={index} value={ctr.name}>{ctr.name}</option>
+                                    
+                                )
+                            })
+                            :"No City"
+                        }
+                        </select>
                   </div>
               </div>
               <div className="input-content">
-                  <label className="label text" htmlFor="zip">ZipCode</label>
+                  <label className="label_text" htmlFor="zip">ZipCode</label>
                   <div className="row-content">
                       <input className="input" type="text" id="zip" name="zip" placeholder="Enter Zip Code" 
                       onChange={onNameChange} value={formValue.zip} required/>
@@ -199,8 +278,8 @@ useEffect(() => {
           </div>
           <div className="buttonParent">
               <div className="add-reset">
-                <button variant="contained" size="large" type="submit" id="addButton">{formValue.isUpdate ? 'Update' : 'Submit'}</button>
-                <button variant="contained" size="large" type="reset" id="resetButton" onClick={onReset}>Reset</button>
+                <button className='button' variant="contained" size="large" type="submit" id="addButton">{formValue.isUpdate ? 'Update' : 'Submit'}</button>
+                <button className='button' variant="contained" size="large" type="reset" id="resetButton" onClick={onReset}>Reset</button>
               </div>
           </div>
       </form>

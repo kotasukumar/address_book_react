@@ -48,12 +48,6 @@ class Home extends Component {
             this.setState({ addressbook: response.data.contactData });
         });
     }
-    
-    /* delete = (personId) => {
-        BookServices.deletePerson(personId);
-        window.location.reload();
-        this.fetchData();
-    }; */
 
     delete = (employeeId) => {   
         var answer = window.confirm("Data once deleted cannot be restored!! Do you wish to continue ?");
@@ -78,7 +72,7 @@ class Home extends Component {
                 Person Details
             </div>
             <Link to="/login">
-                <img width='30' height='30' src={logout} alt='/'/></Link>
+                <img width='60' height='60' src={logout} alt='/'/></Link>
             <Link to="/form">
                 <img width='30' height='30' src={add} alt='/'/></Link>
         </div>
