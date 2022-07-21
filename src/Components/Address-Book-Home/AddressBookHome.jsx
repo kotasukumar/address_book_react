@@ -8,7 +8,6 @@ import { NavLink } from "react-router-dom";
 import logout from '../../Assests/logout.webp';
 
 class Home extends Component {
-    /*============================================================================================ */
     
     constructor(props) {
         super(props);
@@ -19,8 +18,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        this.fetchData();
-        // console.log(this.props)
+        this.fetchData();  //calling fetch data function to get all addressess
     }
 
 	fetchData = () => {
@@ -38,17 +36,27 @@ class Home extends Component {
         });
     };
 
+    /* 
+    Calling short by city in bookservice to perform sorting of cities
+     */
     sortByCity() {
         BookServices.sortByCity().then((response) => {
             this.setState({ addressbook: response.data.contactData });
         });
     }
+
+    /*
+     Calling short by state in bookservice to perform sorting of states 
+     */
     sortByState() {
         BookServices.sortByState().then((response) => {
             this.setState({ addressbook: response.data.contactData });
         });
     }
 
+    /* 
+    Passing contact id to service layer to delete the particular contact 
+    */
     delete = (employeeId) => {   
         var answer = window.confirm("Data once deleted cannot be restored!! Do you wish to continue ?");
         if(answer === true){
@@ -62,12 +70,15 @@ class Home extends Component {
         }
   };
 
-    /*============================================================================================ */
+/*===================================================================================================
+                                HTML for Home page
+====================================================================================================== */
     render() {
   return (
     <div>    
     <div className="main-content">
         <div className="header-content">
+{/* ----------------------------- Declaring body header ------------------------------------------ */}
             <div className="person-detail-text">
                 Person Details
             </div>
@@ -77,6 +88,7 @@ class Home extends Component {
                 <img width='30' height='30' src={add} alt='/'/></Link>
         </div>
     
+{/* ----------------------------- Declaring table content------------------------------------------ */}
     <table id="table-display" className="table">
     <thead><tr>            
             <th scope="col" >Name</th>

@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
 import './Header.css'
 import Logo from '../src/Assests/icon/icons8-address-book-2-48.png'
 
 export class Header extends Component {
+/*===================================================================================================
+                                HTML for header(common to all the pages)
+====================================================================================================== */
   render() {
     return (
       <div>

@@ -5,6 +5,10 @@ import { Link, useNavigate } from 'react-router-dom';
 
 function Login(){
     let navigate = useNavigate();
+
+    /*
+     Checking user is a registered user or not 
+     */
     const check = (event) => {
         event.preventDefault();
         let object = {
@@ -22,6 +26,9 @@ function Login(){
             })
     }
 
+/*===================================================================================================
+                                HTML for login page
+====================================================================================================== */
     return(
         <>
         <div className="loginPage">
@@ -30,17 +37,20 @@ function Login(){
             </div>
             <div className="body">
                 <form onSubmit={check}>
+{/* ------------------------------ Name label ---------------------------------------------------- */}   
                     <div className="label">
                         <label>User Name</label>                        
                         <input type='text' id='userName' name="userName" className='input'/>
                     </div>
+{/* ------------------------------ Password label ---------------------------------------------------- */}   
                     <div className="label">
                         <label>Password</label>
                         <input type='text' id='password' name="password" className='input'/>
                     </div>
+{/* ------------------------------ login or signup button ---------------------------------------------------- */}   
                     <div>
                     <button className='button'>Login</button></div>
-                    <div>or</div>
+                    <div>if you are not registered user, then</div>
                     <Link to='/register'>
                     <button className='button'>SignUp</button></Link>
                 </form>
